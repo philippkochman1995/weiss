@@ -12,6 +12,8 @@
   --accent: #de8ac6;
   --accent-strong: #cb5fae;
   --accent-soft: rgba(222, 138, 198, 0.2);
+  --photo-filter-strong: grayscale(1) sepia(0.72) hue-rotate(268deg) saturate(3.2) brightness(1.2) contrast(0.78);
+  --photo-filter-soft: grayscale(1) sepia(0.62) hue-rotate(268deg) saturate(2.4) brightness(1.12) contrast(0.82);
   --max-width: 1140px;
   --shadow: 0 16px 30px rgba(164, 75, 131, 0.14);
 }
@@ -133,15 +135,30 @@ img {
   isolation: isolate;
 }
 
-.hero-media::after {
+.hero-media::before {
   content: "";
   position: absolute;
   inset: 0;
   z-index: 1;
   background:
-    linear-gradient(110deg, rgba(225, 139, 201, 0.56), rgba(255, 255, 255, 0.18) 58%),
-    linear-gradient(180deg, rgba(225, 139, 201, 0.08), rgba(225, 139, 201, 0.78));
+    radial-gradient(125% 115% at 12% 88%, rgba(221, 112, 188, 0.62), rgba(239, 180, 221, 0.4) 44%, rgba(255, 255, 255, 0.52) 100%),
+    linear-gradient(92deg, rgba(220, 118, 189, 0.62), rgba(255, 255, 255, 0.08) 64%);
+  mix-blend-mode: screen;
+  opacity: 0.88;
+  pointer-events: none;
+}
+
+.hero-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background:
+    linear-gradient(110deg, rgba(225, 139, 201, 0.7), rgba(255, 255, 255, 0.2) 58%),
+    linear-gradient(180deg, rgba(225, 139, 201, 0.16), rgba(225, 139, 201, 0.88)),
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.1) 0 1px, rgba(255, 255, 255, 0) 1px 4px);
   mix-blend-mode: multiply;
+  opacity: 0.9;
   pointer-events: none;
 }
 
@@ -149,13 +166,14 @@ img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: grayscale(1) contrast(0.94) brightness(1.08);
+  filter: var(--photo-filter-strong);
+  transform: scale(1.015);
 }
 
 .hero-overlay {
   position: absolute;
   inset: 0;
-  z-index: 2;
+  z-index: 3;
   padding: clamp(1.2rem, 4vw, 2.5rem);
   display: flex;
   flex-direction: column;
@@ -339,14 +357,32 @@ h3 {
   aspect-ratio: 16 / 9;
   width: 100%;
   overflow: hidden;
+  isolation: isolate;
+}
+
+.card-media::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    radial-gradient(130% 110% at 10% 100%, rgba(223, 132, 197, 0.44), rgba(255, 255, 255, 0.14) 68%),
+    linear-gradient(112deg, rgba(223, 132, 197, 0.38), rgba(255, 255, 255, 0.04) 60%);
+  mix-blend-mode: screen;
+  opacity: 0.82;
+  pointer-events: none;
 }
 
 .card-media::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(145deg, rgba(222, 138, 198, 0.62), rgba(255, 255, 255, 0.16));
+  z-index: 2;
+  background:
+    linear-gradient(145deg, rgba(222, 138, 198, 0.74), rgba(255, 255, 255, 0.15)),
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.08) 0 1px, rgba(255, 255, 255, 0) 1px 5px);
   mix-blend-mode: multiply;
+  opacity: 0.86;
   pointer-events: none;
 }
 
@@ -354,7 +390,7 @@ h3 {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: grayscale(1) contrast(0.94) brightness(1.04);
+  filter: var(--photo-filter-soft);
   transition: transform 300ms ease;
 }
 
@@ -393,13 +429,29 @@ p:last-child {
   isolation: isolate;
 }
 
-.feature-banner::after {
+.feature-banner::before {
   content: "";
   position: absolute;
   inset: 0;
   z-index: 1;
-  background: linear-gradient(120deg, rgba(222, 138, 198, 0.56), rgba(255, 255, 255, 0.15));
+  background:
+    radial-gradient(140% 116% at 0% 100%, rgba(223, 132, 197, 0.46), rgba(255, 255, 255, 0.14) 72%),
+    linear-gradient(115deg, rgba(223, 132, 197, 0.35), rgba(255, 255, 255, 0.04) 60%);
+  mix-blend-mode: screen;
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+.feature-banner::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background:
+    linear-gradient(120deg, rgba(222, 138, 198, 0.72), rgba(255, 255, 255, 0.15)),
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.08) 0 1px, rgba(255, 255, 255, 0) 1px 5px);
   mix-blend-mode: multiply;
+  opacity: 0.86;
   pointer-events: none;
 }
 
@@ -407,13 +459,13 @@ p:last-child {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: grayscale(1) contrast(0.96) brightness(1.06);
+  filter: var(--photo-filter-soft);
 }
 
 .feature-copy {
   position: absolute;
   inset: auto 0 0 0;
-  z-index: 2;
+  z-index: 3;
   padding: 1.1rem;
   background: linear-gradient(180deg, rgba(245, 241, 245, 0), rgba(245, 241, 245, 0.92) 68%);
 }
