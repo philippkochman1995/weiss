@@ -1,2 +1,2 @@
 # weiss
-Frank Weiss
+Colaro - Frank Weiß Agentur
